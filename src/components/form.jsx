@@ -1,6 +1,7 @@
-export function Form() {
+/* eslint-disable react/prop-types */
+export function Form({username, setUsername, password, setPassword, error, handleSubmit}) {
     return (
-        <form action="#" method="POST">
+        <form action="#" method="POST" onSubmit={handleSubmit}>
             {/* Username Input */}
             <div className="mb-4">
                 <label htmlFor="username" className="block text-gray-600">
@@ -10,8 +11,11 @@ export function Form() {
                     type="text"
                     id="username"
                     name="username"
+                    required={true}
+                    value={username}
                     className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
                     autoComplete="off"
+                    onChange={(e) => {setUsername(e.target.value)}}
                 />
             </div>
             {/* Password Input */}
@@ -23,16 +27,24 @@ export function Form() {
                     type="password"
                     id="password"
                     name="password"
+                    required={true}
+                    value={password}
                     className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
                     autoComplete="off"
+                    onChange={(e)=> {setPassword(e.target.value)}}
                 />
-                <img onClick={handleEye} id="Eye" src="../src/assets/eye.svg" alt="eye icon" className="absolute right-[-10px] bottom-[-10px] w-[28px] h-[28px] transform translate-x-[-50%] translate-y-[-50%] cursor-pointer"/>
             </div>
+            {/* Error Message */}
+            {error && (
+                <div className="items-center w-full bg-red-100 border border-red-400 rounded-md py-2 px-3 mb-4 text-red-700">
+                    <strong className="font-bold">Wrong Credentials </strong><br/>
+                    <span className="block sm:inline">Invalid username or password</span>
+                </div>
+            )}
             {/* Login Button */}
             <button
                 type="submit"
                 className="bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md py-2 px-4 w-full"
-                onSubmit={handleSubmit}
             >
                 Log In
             </button>
@@ -40,18 +52,3 @@ export function Form() {
     );
 }
 
-function handleSubmit(e) {
-    e.preventDefault();
-    console.log('Form Submitted');
-}
-
-// let isHidden = true;
-function handleEye(e) {
-    console.log('Eye Clicked');
-    console.log(e.target);
-//     isHidden = !isHidden;
-// e.target.previousElementSibling.type = isHidden ? "password" : "text";
-// e.target.src = isHidden
-//   ? "../static/assets/eye.svg"
-//   : "../static/assets/eye-off.svg";
-}
