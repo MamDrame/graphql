@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 
 /**
- * The `useLocalStorage` function is a custom hook in JavaScript that verifies if token exist go to profile page, else return to the login page
+ *
+ * @param {token} initialValue
+ * @returns
  */
 export function useLocalStorage(initialValue) {
   const [value, setValue] = useState(() => {
@@ -30,7 +32,7 @@ export function useLocalStorage(initialValue) {
 export function useFetch(url, options) {
     const [data, setData] = useState(null);
     const [error, setError] = useState(null);
-    
+
     useEffect(() => {
       const fetchData = async () => {
           try {
@@ -40,10 +42,15 @@ export function useFetch(url, options) {
           } catch (error) {
               setError(error);
           }
+          return () => {
+              setData(null);
+              setError(null);
+          }
       };
 
       fetchData();
-  }, [url, options]);
-    
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
     return [ data, error ];
     }

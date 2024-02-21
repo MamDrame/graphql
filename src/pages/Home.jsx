@@ -1,13 +1,16 @@
 import { useState } from "react";
 import { Form } from "../components/form.jsx";
 import { Landing } from "../components/landing-page.jsx";
-import { useLocalStorage } from "../lib/hooks.js";
-
+/**
+ *
+ * @param {function} navigateTo
+ * @returns
+ */
 export default function Home() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
-  let [token, setToken] = useLocalStorage("token", null);
+  let [token, setToken] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,6 +18,7 @@ export default function Home() {
       username,
       password,
     };
+    console.log(data);
     try {
       const response = await fetch(
         "https://learn.zone01dakar.sn/api/auth/signin",
@@ -32,7 +36,10 @@ export default function Home() {
         throw new Error(token.message);
       }
       setToken(token);
+      localStorage.setItem("token", JSON.stringify(token));
       setError(null);
+      // navigateTo("profile")
+      location.href = "/profile";
     } catch (error) {
       console.log("Error:", error);
       //transform the error object into a string
