@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { QueryUserData } from "../api/query.js";
+
 
 /**
  *
@@ -34,9 +36,10 @@ export function useFetch(query) {
             Authorization: token ? `Bearer ${token}`: '',
             // Ajoutez tout en-tête d'autorisation ou autre en-tête requis ici
           },
-          body: JSON.stringify({ query }),
+          body: JSON.stringify({ query: QueryUserData }),
         });
         const responseData = await response.json();
+        console.log(responseData);
         setData(responseData.data);
       } catch (error) {
         setError(error);

@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { QueryUserData } from "../api/query.js";
 import { Form } from "../components/form.jsx";
 import { Landing } from "../components/landing-page.jsx";
+import { useFetch } from "../lib/hooks.js";
 /**
  *
  * @param {function} navigateTo
@@ -35,7 +37,7 @@ export default function Home() {
         throw new Error(token.message);
       }
       setToken(token);
-      localStorage.setItem("token", JSON.stringify(token));
+      localStorage.setItem("token", token);
       setError(null);
       // navigateTo("profile")
       location.href = "/profile";
@@ -45,7 +47,8 @@ export default function Home() {
       setError(error.toString());
     }
   };
-  console.log(token);
+  const { data } = useFetch(QueryUserData, token);
+  console.log(data);
   return (
     <div className="bg-gray-100 flex justify-center items-center h-screen">
       {/* Left: Image */}

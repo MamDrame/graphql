@@ -21,13 +21,14 @@ export default function Profile() {
     return <div>Error: {error.message}</div>;
   }
   console.log(data);
+  console.log(data?.user);
 
   return (
     <>
       <main className="grid grid-cols-12 gap-2 bg-zinc-50 p-1">
         <header className="header col-span-12 rounded-lg border border-gray-300">
           {/* Header content */}
-          <Navbar user={data?.data?.user} />
+          <Navbar user={data?.user} />
         </header>
         <section className="col-span-full rounded-lg sm:col-span-full">
           {/* stats Content */}
