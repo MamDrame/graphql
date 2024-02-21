@@ -18,7 +18,6 @@ export default function Home() {
       username,
       password,
     };
-    console.log(data);
     try {
       const response = await fetch(
         "https://learn.zone01dakar.sn/api/auth/signin",
@@ -46,7 +45,7 @@ export default function Home() {
       setError(error.toString());
     }
   };
-  // localStorage.setItem("token", token);
+  console.log(token);
   return (
     <div className="bg-gray-100 flex justify-center items-center h-screen">
       {/* Left: Image */}

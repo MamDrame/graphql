@@ -1,25 +1,33 @@
 import { useEffect } from "react";
+import { QueryUserData } from "../api/query.js";
 import CircleCard from "../components/circlecard.jsx";
 import DiagramCard from "../components/diagramcard.jsx";
 import { Footer } from "../components/footer.jsx";
 import ListCard from "../components/listcard.jsx";
 import { Navbar } from "../components/navbar.jsx";
 import StatCard from "../components/statcard.jsx";
-import { useLocalStorage } from "../lib/hooks.js";
+import { useFetch } from "../lib/hooks.js";
 // import { useEffect, useState } from 'react';
-export default function Profile(navigateTo) {
-  const [token] = useLocalStorage("token", null);
+export default function Profile() {
+  let token = localStorage.getItem("token");
   useEffect(() => {
-    if (!token) {
-      navigateTo("");
+    if (token === null) {
+      location.href = "/";
     }
-  }, [navigateTo, token]);
+  }, [token]);
+
+  const { data, error } = useFetch(QueryUserData);
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
+  console.log(data);
+
   return (
     <>
       <main className="grid grid-cols-12 gap-2 bg-zinc-50 p-1">
         <header className="header col-span-12 rounded-lg border border-gray-300">
           {/* Header content */}
-          <Navbar />
+          <Navbar user={data?.data?.user} />
         </header>
         <section className="col-span-full rounded-lg sm:col-span-full">
           {/* stats Content */}
@@ -41,10 +49,6 @@ export default function Profile(navigateTo) {
           <Footer />
         </footer>
       </main>
-
-      {/* <Dashboard/> */}
     </>
   );
 }
-/*
- */

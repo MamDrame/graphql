@@ -18,39 +18,37 @@ export function useLocalStorage(initialValue) {
 
   return [value, setToken];
 }
-/**
- * The `useFetch` function is a custom hook in JavaScript that fetches data from a specified URL and
- * returns the data and any errors that occur.
- * @param {string} url - The `url` parameter is the URL of the API endpoint that you want to fetch data from. It
- * can be a string representing the URL.
- * @param {FetchEventInit} options - The `options` parameter is an object that contains additional settings for the
- * fetch request. It can include properties such as `method` (GET, POST, PUT, DELETE, etc.), `headers`
- * (an object of key-value pairs representing the request headers), `body` (the request body),
- * @returns The useFetch function returns an object with two properties: "data" and "error".
- */
 
-export function useFetch(url, options) {
+export function useFetch(query) {
     const [data, setData] = useState(null);
-    const [error, setError] = useState(null);
+  const [error, setError] = useState(null);
 
-    useEffect(() => {
-      const fetchData = async () => {
-          try {
-              const response = await fetch(url, options);
-              const responseData = await response.json();
-              setData(responseData);
-          } catch (error) {
-              setError(error);
-          }
-          return () => {
-              setData(null);
-              setError(null);
-          }
-      };
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const token = localStorage.getItem('token')
+        const response = await fetch('https://learn.zone01dakar.sn/api/graphql-engine/v1/graphql', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: token ? `Bearer ${token}`: '',
+            // Ajoutez tout en-tête d'autorisation ou autre en-tête requis ici
+          },
+          body: JSON.stringify({ query }),
+        });
+        const responseData = await response.json();
+        setData(responseData.data);
+      } catch (error) {
+        setError(error);
+      }
+    }
+    fetchData();
+    // Nettoyage des effets lorsque le composant est démonté ou que le query change
+    return () => {
+      // Éventuelles opérations de nettoyage
 
-      fetchData();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    };
+  }, [query]);
 
-    return [ data, error ];
+  return { data, error };
     }

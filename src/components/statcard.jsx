@@ -1,37 +1,8 @@
-import { useFetch } from "../lib/hooks.js";
-
 /*
  * This component is the header of the dashboard
  * @returns {JSX.Element} - The Statcomponent component
  */
 function StatCard() {
-  const query = {
-    query: `
-    {
-      user {
-        firstName
-        lastName
-        login
-        campus
-        auditRatio
-        totalUp
-        totalDown
-      }
-    }`,
-  };
-  const [data] = useFetch(
-    "https://learn.zone01dakar.sn/api/graphql-engine/v1/graphql",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-      body: JSON.stringify(query),
-    }
-  );
-  // error && console.error(error);
-  console.log(data);
   return (
     <div className="mt-2 flex w-full flex-wrap items-center justify-evenly gap-16">
       <div

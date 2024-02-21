@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
-import ErrorPage from './ErrorPage.jsx';
-import Home from './Home.jsx';
-import Profile from './Profile.jsx';
+import { useEffect, useState } from "react";
+import ErrorPage from "./ErrorPage.jsx";
+import Home from "./Home.jsx";
+import Profile from "./Profile.jsx";
 
 function App() {
   const [currentPage, setCurrentPage] = useState(getInitialPage());
@@ -9,20 +9,20 @@ function App() {
   // Fonction pour obtenir la page initiale en fonction de l'URL
   function getInitialPage() {
     const path = window.location.pathname;
-    if (path === '/profile') {
-      return 'profile';
+    if (path === "/profile") {
+      return "profile";
     } else {
-      return '';
+      return "";
     }
   }
 
   // Fonction pour mettre à jour la page en fonction de l'URL
   function handlePageChange() {
     const path = window.location.pathname;
-    if (path === '/profile') {
-      setCurrentPage('profile');
+    if (path === "/profile") {
+      setCurrentPage("profile");
     } else {
-      setCurrentPage('');
+      setCurrentPage("");
     }
   }
 
@@ -35,27 +35,26 @@ function App() {
 
   useEffect(() => {
     // Écouter les changements d'URL
-    window.addEventListener('popstate', handlePageChange);
+    window.addEventListener("popstate", handlePageChange);
 
     return () => {
       // Retirer l'écouteur lors du démontage du composant
-      window.removeEventListener('popstate', handlePageChange);
+      window.removeEventListener("popstate", handlePageChange);
     };
   }, []);
 
   // Rendu conditionnel en fonction de la page actuelle
   let pageContent;
   switch (currentPage) {
-    case '':
+    case "":
       pageContent = <Home navigateTo={navigateTo} />;
       break;
-    case 'profile':
+    case "profile":
       pageContent = <Profile navigateTo={navigateTo} />;
       break;
     default:
       pageContent = <ErrorPage />;
   }
-console.log(pageContent);
   return <>{pageContent}</>;
 }
 
