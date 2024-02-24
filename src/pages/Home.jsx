@@ -1,8 +1,6 @@
 import { useState } from "react";
-import { QueryUserData } from "../api/query.js";
 import { Form } from "../components/form.jsx";
 import { Landing } from "../components/landing-page.jsx";
-import { useFetch } from "../lib/hooks.js";
 /**
  *
  * @param {function} navigateTo
@@ -12,7 +10,6 @@ export default function Home() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
-  let [token, setToken] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,29 +23,24 @@ export default function Home() {
         {
           method: "POST",
           headers: {
-            Authorization: `Basic ${btoa(data.username + ":" + data.password)}`,
+            Authorization: `Basic ${btoa(`${data.username}:${data.password}`)}`,
             "Content-Type": "application/json",
           },
         }
       );
-      token = await response.json();
+      const token = await response.json();
       if (!response.ok) {
-        setError(response.statusText);
         throw new Error(token.message);
       }
-      setToken(token);
       localStorage.setItem("token", token);
       setError(null);
       // navigateTo("profile")
       location.href = "/profile";
     } catch (error) {
       console.log("Error:", error);
-      //transform the error object into a string
       setError(error.toString());
     }
   };
-  const { data } = useFetch(QueryUserData, token);
-  console.log(data);
   return (
     <div className="bg-gray-100 flex justify-center items-center h-screen">
       {/* Left: Image */}

@@ -1,57 +1,63 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { QueryUserData } from "../api/query.js";
 
 
-/**
- *
- * @param {token} initialValue
- * @returns
- */
-export function useLocalStorage(initialValue) {
-  const [value, setValue] = useState(() => {
-    const item = localStorage.getItem("token");
-    return item ? JSON.parse(item) : initialValue;
-  });
-
-  const setToken = (value) => {
-    setValue(value);
-    localStorage.setItem("token", JSON.stringify(value));
-  };
-
-  return [value, setToken];
-}
-
-export function useFetch(query) {
-    const [data, setData] = useState(null);
+export function useFetch(token) {
+  const [data, setData] = useState(null);
   const [error, setError] = useState(null);
-
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
-    async function fetchData() {
+    const fetchData = async () => {
       try {
-        const token = localStorage.getItem('token')
+        setLoading(true);
         const response = await fetch('https://learn.zone01dakar.sn/api/graphql-engine/v1/graphql', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            Authorization: token ? `Bearer ${token}`: '',
-            // Ajoutez tout en-tête d'autorisation ou autre en-tête requis ici
+            Authorization: token ? `Bearer ${token}` : '',
           },
           body: JSON.stringify({ query: QueryUserData }),
         });
         const responseData = await response.json();
-        console.log(responseData);
         setData(responseData.data);
+        setLoading(false);
       } catch (error) {
         setError(error);
+        setLoading(false);
       }
-    }
-    fetchData();
-    // Nettoyage des effets lorsque le composant est démonté ou que le query change
-    return () => {
-      // Éventuelles opérations de nettoyage
-
     };
-  }, [query]);
 
-  return { data, error };
-    }
+    fetchData();
+
+    return () => {
+      // Nettoyage des effets lorsque le composant est démonté ou que le query change
+      // Éventuelles opérations de nettoyage
+    };
+  }, [token]);
+
+  return { data,loading, error };
+}
+
+export function useElementWidth() {
+  const [width, setWidth] = useState(0);
+  const elementRef = useRef(null);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (elementRef.current) {
+        const elementWidth = elementRef.current.getBoundingClientRect().width;
+        setWidth(elementWidth);
+      }
+    };
+
+    handleResize(); // Appel initial pour obtenir la largeur initiale
+
+    window.addEventListener('resize', handleResize); // Écouter les redimensionnements de fenêtre
+
+    return () => {
+      window.removeEventListener('resize', handleResize); // Nettoyage de l'écouteur lors du démontage du composant
+    };
+  }, [elementRef]);
+
+  return [elementRef, width];
+}

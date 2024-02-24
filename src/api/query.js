@@ -70,7 +70,7 @@ export const QueryUserData = `
 
 
 upRatio: transaction_aggregate(
-  where: {event: {registrationId: {_eq: 55}}, type: {_eq: "up"}}
+  where: {type: {_eq: "up"}}
 ) {
   aggregate {
     sum {
@@ -80,7 +80,7 @@ upRatio: transaction_aggregate(
 
 }
 downRatio: transaction_aggregate(
-  where: {event: {registrationId: {_eq: 55}}, type: {_eq: "down"}}
+  where: {type: {_eq: "down"}}
 ) {
   aggregate {
     sum {
