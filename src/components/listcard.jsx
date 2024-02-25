@@ -1,21 +1,15 @@
 import { convertFormatDate } from "../lib/utils.js";
 
 /* eslint-disable react/prop-types */
-export default function ListCard({ auditsTable }) {
-  // const username = auditsTable?.group.captainLogin;
-  // const project = auditsTable?.group.path;
-  // const date = auditsTable?.updatedAt;
-  // const result = auditsTable?.grade;
-  // console.log(username);
-  // console.log(project);
-  // console.log(convertFormatDate(date));
-  // console.log(auditsTable[0].grade >= 1);
-  // console.log(auditsTable);
+export default function ListCard({ auditsTable, invalidAudits, validAudits }) {
   return (
     <div className="overflow-x-auto">
-      <div>
+      <div className="text-center pb-4">
         <h2 className="text-2xl font-bold text-center">Audits</h2>
-        <p> </p>
+        <p>
+          You have audited {invalidAudits + validAudits} projects in total. And
+          you failed {invalidAudits} projects and passed {validAudits} projects.
+        </p>
       </div>
       <table className="min-w-full">
         <thead className="border-b">
@@ -45,7 +39,6 @@ export default function ListCard({ auditsTable }) {
 }
 
 function Trcomponent({ audit }) {
-  // console.log(audit.grade);
   return (
     <tr className="border-b">
       <td className="whitespace-nowrap px-6 py-4 text-sm font-light">
@@ -58,9 +51,6 @@ function Trcomponent({ audit }) {
         {convertFormatDate(audit?.updatedAt)}
       </td>
       <td className="border-b border-gray-200 px-6 py-4">
-        {/* <span className="rounded-full bg-green-500 px-2 py-1 text-xs">
-          Active
-        </span> */}
         <Status audit={audit.grade} />
       </td>
     </tr>

@@ -52,7 +52,11 @@ export default function Profile() {
         </section>
         <section className="col-span-full rounded-lg shadow-md bg-gray-900 sm:col-span-full">
           {/* Table Content */}
-          <ListCard auditsTable={data?.user[0].audits} />
+          <ListCard
+            auditsTable={data?.user[0].audits}
+            invalidAudits={data?.user[0].invalidAudits.aggregate.count}
+            validAudits={data?.user[0].validAudits.aggregate.count}
+          />
         </section>
         <footer className="footer col-span-12 rounded-lg text-center shadow-md lg:text-left">
           <Footer />
