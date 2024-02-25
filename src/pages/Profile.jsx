@@ -28,32 +28,33 @@ export default function Profile() {
 
   return (
     <>
-      <main className="grid grid-cols-12 gap-2 bg-zinc-50 p-1 text-black">
-        <header className="header col-span-12 rounded-lg border border-gray-300">
+      <main className="grid grid-cols-12 gap-2 p-1">
+        <header className="header col-span-12 rounded-lg shadow-md">
           {/* Header content */}
           <Navbar user={data?.user} />
         </header>
         <section className="col-span-full rounded-lg sm:col-span-full">
           {/* stats Content */}
           <StatCard
-            downRatio={data?.downRatio}
-            upRatio={data?.upRatio}
-            xp={data?.transaction_aggregate.aggregate.sum}
+            downRatio={data?.downRatio.aggregate.sum.amount}
+            upRatio={data?.upRatio.aggregate.sum.amount}
+            xp={data?.transaction_aggregate.aggregate.sum.amount}
+            level={data?.user[0]?.level[0]?.level}
           />
         </section>
-        <section className="col-span-12 rounded-lg border border-gray-500 p-32 sm:col-span-8">
+        <section className="col-span-12 rounded-lg p-32 shadow-md bg-gray-900 sm:col-span-8">
           {/* Graph Content */}
           <DiagramCard />
         </section>
-        <section className="col-span-12 rounded-lg border border-gray-400 p-16 sm:col-span-4">
+        <section className="col-span-12 rounded-lg p-16 shadow-md bg-gray-900 sm:col-span-4">
           {/* Diagram Content */}
           <CircleCard />
         </section>
-        <section className="col-span-full rounded-lg border border-gray-500 sm:col-span-full">
+        <section className="col-span-full rounded-lg shadow-md bg-gray-900 sm:col-span-full">
           {/* Table Content */}
-          <ListCard />
+          <ListCard auditsTable={data?.user[0].audits} />
         </section>
-        <footer className="footer col-span-12 rounded-lg border border-gray-800 text-center lg:text-left">
+        <footer className="footer col-span-12 rounded-lg text-center shadow-md lg:text-left">
           <Footer />
         </footer>
       </main>

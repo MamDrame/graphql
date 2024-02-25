@@ -4,35 +4,39 @@
  * @returns {JSX.Element} - The Statcomponent component
  */
 
+import { convertXP } from "../lib/utils.js";
 import { Auditcomponent } from "./audit.jsx";
 
-export function StatCard({ downRatio, upRatio, xp }) {
-  const data = upRatio.aggregate.sum.amount / downRatio.aggregate.sum.amount;
-  const down = downRatio.aggregate.sum.amount;
-  const up = upRatio.aggregate.sum.amount;
+export function StatCard({ downRatio, upRatio, xp, level }) {
+  const down = downRatio;
+  const up = upRatio;
+  const data = upRatio / downRatio;
+  const Xp = convertXP(xp);
   return (
     <div className="mt-2 flex w-full flex-wrap items-center justify-center gap-16">
       <div
         href="#"
-        className="flex h-32 w-1/4 bg-[#d5d1f7] flex-col items-center justify-evenly rounded-md border-2 border-dashed border-gray-200 transition-colors duration-100 ease-in-out hover:border-gray-400/80"
+        className="flex h-48 w-1/4 flex-col bg-gray-900 shadow-md items-center justify-evenly rounded-md"
       >
         <div className="flex flex-row text-2xl items-center justify-between gap-4">
-          <h4 className="mt-2 text-xl text-gray-400">XP</h4>
-          <span className="material-symbols-outlined">timeline</span>
+          <h4>XP</h4>
         </div>
-        <span className="font-bold text-3xl text-purple-600">{xp.amount}</span>
-        <p className="mt-2 text-l text-gray-400">XP</p>
+        <span className="w-28 h-28 rounded-full bg-gradient-to-br from-slate-900 to-purple-900 flex flex-col items-center justify-center font-bold text-3xl text-purple-600">
+          {Xp}
+        </span>
+        <p className="m-0.5 text-l ">XP</p>
       </div>
       <div
         href="#"
-        className="flex h-32 w-1/4 bg-[#d5d1f7] flex-col items-center justify-evenly rounded-md border-2 border-dashed border-gray-200 transition-colors duration-100 ease-in-out hover:border-gray-400/80"
+        className="flex h-48 w-1/4 flex-col bg-gray-900 shadow-md items-center justify-evenly rounded-md"
       >
         <div className="flex flex-row text-2xl items-center justify-center gap-4">
-          <h4 className="mt-2 text-xl text-gray-400">Level</h4>
-          <span className="material-symbols-outlined">timeline</span>
+          <div>Level</div>
         </div>
-        <span className="font-bold text-3xl text-purple-600"> 4.6K </span>
-        <p className="mt-2 text-l text-gray-400">XP</p>
+        <span className="w-20 h-20 rounded-full bg-gradient-to-br from-slate-900 to-purple-900 flex flex-col items-center justify-center font-bold text-3xl text-purple-600">
+          {level}
+        </span>
+        <p className="mt-0.5 text-l">level</p>
       </div>
       <Auditcomponent up={up} down={down} data={data} />
     </div>

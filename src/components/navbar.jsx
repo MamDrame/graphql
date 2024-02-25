@@ -12,7 +12,7 @@ export function Navbar({ user }) {
   const campus = user[0]?.campus;
 
   return (
-    <nav className="bg-white px-4 py-2.5 shadow-blue-500/50 lg:px-6">
+    <nav className=" py-2.5 lg:px-4">
       <div className="mx-auto flex max-w-screen-xl items-center justify-between">
         <div className="flex flex-col">
           <div className="box-content text-lg flex flex-row items-center justify-start sm:text-sm">
@@ -25,10 +25,9 @@ export function Navbar({ user }) {
               Welcome to 01Talent Dashboard {Firstname} {Lastname}
             </h6>
           </div>
-          <p className="whitespace-nowrap font-light text-sm sm:text-xs">
-            {" "}
-            I am 01talent from Zone01 {campus} under the login name of {login}
-            ,and here are my stats.
+          <p className="ml-12 whitespace-nowrap font-light text-sm sm:text-xs">
+            I am 01talent from Zone01 {campus} under the login name of {login},
+            and here are my stats.
           </p>
         </div>
         <div className="flex items-center lg:order-2">
@@ -37,7 +36,7 @@ export function Navbar({ user }) {
             className="w-10 h-10 rounded-full"
             alt="avatar"
           />
-          <p className="mr-2 rounded-lg px-4 py-2 text-sm font-medium text-gray-800 lg:px-5 lg:py-2.5">
+          <p className="mr-2 rounded-lg px-4 py-2 text-sm font-medium lg:px-5 lg:py-2.5">
             {Firstname} {Lastname}
           </p>
           <button
@@ -45,7 +44,7 @@ export function Navbar({ user }) {
               localStorage.removeItem("token");
               location.href = "/";
             }}
-            className="mr-2 rounded-lg bg-blue-700 px-4 py-2 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 lg:px-5 lg:py-1"
+            className="mr-2 rounded-lg bg-blue-700 px-4 py-2 text-sm font-medium hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 lg:px-5 lg:py-1"
           >
             Log Out
           </button>

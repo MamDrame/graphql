@@ -1,6 +1,3 @@
-
 export default function DiagramCard() {
-  return (
-    <div>DiagramCard</div>
-  )
+  return <div className="">DiagramCard</div>;
 }

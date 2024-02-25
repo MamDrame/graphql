@@ -4,7 +4,7 @@ export function Auditcomponent({ up, down, data }) {
   return (
     <div
       href="#"
-      className="flex h-32 w-1/4 bg-[#d5d1f7] flex-col items-center justify-evenly rounded-md border-2 border-dashed border-gray-200 transition-colors duration-100 ease-in-out hover:border-gray-400/80"
+      className="flex h-48 w-1/4 flex-col bg-gray-900 shadow-md items-center justify-evenly rounded-md"
     >
       <div className="text-2xl items-center justify-start">Audit Ratio</div>
       <AuditGraph up={up} down={down} data={data} />
@@ -19,17 +19,17 @@ export function Auditcomponent({ up, down, data }) {
 }
 
 function AuditGraph({ up, down, data }) {
-  const doneMB = (up / 1000000).toFixed(2);
-  const receivedMB = (down / 1000000).toFixed(2);
+  const doneMB = convertXP(up);
+  const receivedMB = convertXP(down);
   return (
     <div className="box-border mt-2 flex justify-between items-center">
       <div className="w-full p-2">
         <Graph isUp={true} up={up} down={down} data={up} ratio={data} />
         <Graph isUp={false} up={up} down={down} data={down} ratio={data} />
       </div>
-      <div className="ml-3">
-        <div className="flex flex-col items-end font-mono text-xs leading-3 text-neutral mb-2">
-          <div>{doneMB} MB</div>
+      <div className="mx-3">
+        <div className="flex flex-col items-end font-mono text-xs leading-3 gap-1.5 text-neutral-50 mb-2">
+          <div className="text-purple-600">{doneMB}</div>
           <div className="flex items-center">
             <div>Done</div>
             <div className="ml-1">
@@ -37,14 +37,14 @@ function AuditGraph({ up, down, data }) {
             </div>
           </div>
         </div>
-        <div className="flex flex-col items-end font-mono text-xs leading-3 text-neutral mt-2">
+        <div className="flex flex-col items-end font-mono text-xs leading-3 gap-1.5 text-neutral-50 mt-2">
           <div className="flex items-center">
             <div>Received</div>
             <div className="ml-1">
               <SvgArrow strokeColor="#FFFFFF" />
             </div>
           </div>
-          <div>{receivedMB} MB</div>
+          <div className="text-purple-600">{receivedMB}</div>
         </div>
       </div>
     </div>
@@ -52,6 +52,7 @@ function AuditGraph({ up, down, data }) {
 }
 
 import { useElementWidth } from "../lib/hooks.js";
+import { convertXP } from "../lib/utils.js";
 
 const Graph = ({ isUp: e, up: t, down: r, data: n, ratio: o }) => {
   const [s, i] = useElementWidth();

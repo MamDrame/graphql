@@ -42,7 +42,7 @@ export default function Home() {
     }
   };
   return (
-    <div className="bg-gray-100 flex justify-center items-center h-screen">
+    <div className="flex justify-center items-center h-screen">
       {/* Left: Image */}
       <Landing />
       {/* Right: Login Form */}

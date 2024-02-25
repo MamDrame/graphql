@@ -5,30 +5,25 @@
  */
 export function Footer() {
   return (
-    <div className="p-4 text-center text-neutral-700">
+    <div className="py-4 text-center text-neutral-400">
+      {" "}
       © 2024 Copyright :
-      <a
-        className="text-neutral-800"
-        href="https://learn.zone01dakar.sn/git/mamdrame"
-      >
-        {" "}
-        Mamdrame{" "}
-      </a>
-      with
+      <a href="https://learn.zone01dakar.sn/git/mamdrame"> Mamdrame </a>
+      with{" "}
       <img
         src="../src/assets/react.svg"
         alt="react image"
-        className="inline-block mr-2px h-8 w-8 cursor-pointer rounded-full object-cover object-center"
+        className="inline-block ml-2 h-5 w-5 rounded-full"
       />
       <img
         src="../src/assets/vite.svg"
         alt="vite image"
-        className="inline-block mr-2px h-8 w-8 cursor-pointer rounded-full object-cover object-center"
+        className="inline-block ml-2 h-5 w-5 rounded-full "
       />
       <img
         src="../src/assets/javascript.svg"
         alt=" js image"
-        className="inline-block mr-2px h-8 w-8 cursor-pointer rounded-full object-cover object-center"
+        className="inline-block ml-2 h-5 w-5 rounded-full "
       />
     </div>
   );
