@@ -20,7 +20,7 @@ export function Form({
           name="username"
           required={true}
           value={username}
-          className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
+          className="w-full border border-gray-300 text-black rounded-md  py-2 px-3 focus:outline-none focus:border-blue-500"
           autoComplete="off"
           onChange={(e) => {
             setUsername(e.target.value);
@@ -38,7 +38,7 @@ export function Form({
           name="password"
           required={true}
           value={password}
-          className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
+          className="w-full border border-gray-300 text-black rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
           autoComplete="off"
           onChange={(e) => {
             setPassword(e.target.value);

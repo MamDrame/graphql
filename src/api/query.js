@@ -11,8 +11,8 @@ export const QueryUserData = `
     audits(order_by: {createdAt: asc}, where: {grade: {_is_null: false}}) {
       id
       group {
-        path
         captainLogin
+        object{name}
       }
       updatedAt
       grade

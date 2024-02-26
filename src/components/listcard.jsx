@@ -18,7 +18,7 @@ export default function ListCard({ auditsTable, invalidAudits, validAudits }) {
               Username
             </th>
             <th scope="col" className="px-6 py-4 text-left text-sm font-medium">
-              Projects
+              Project
             </th>
             <th scope="col" className="px-6 py-4 text-left text-sm font-medium">
               Date
@@ -45,7 +45,7 @@ function Trcomponent({ audit }) {
         {audit?.group.captainLogin}
       </td>
       <td className="whitespace-nowrap px-6 py-4 text-sm font-light">
-        {audit?.group.path}
+        {audit?.group.object.name}
       </td>
       <td className="whitespace-nowrap px-6 py-4 text-sm font-light">
         {convertFormatDate(audit?.updatedAt)}
