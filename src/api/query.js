@@ -30,21 +30,14 @@ export const QueryUserData = `
     level: events(where: {event: {registrationId: {_eq: 55}}}) {
       level
     }
-    projetValides: progresses(
-      where: {isDone: {_eq: true}, event: {registrationId: {_eq: 55}}}
-    ) {
-      userLogin
-      object {
-        name
-      }
-    }
   }
   transaction_aggregate(
     where: {event: {registrationId: {_eq: 55}}, type: {_eq: "xp"}}
-    order_by: {amount: desc}
+    order_by: {createdAt:asc}
   ) {
     nodes {
       amount
+      createdAt
       object {
         name
       }

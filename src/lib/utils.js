@@ -21,5 +21,33 @@ export function convertFormatDate(dateISO) {
     const jour = dateObj.getDate().toString().padStart(2, '0');
     const mois = (dateObj.getMonth() + 1).toString().padStart(2, '0');
     const annee = dateObj.getFullYear().toString();
-    return `${jour}-${mois}-${annee}`;
+    return `${mois}-${jour}-${annee}`;
+}
+
+export function calculateXpByMonth(data) {
+    // Tableau pour stocker les xp gagnés par mois
+    const xpByMonth = [];
+
+    // Créer un objet Map pour stocker les totaux d'xp par mois
+    const xpMap = new Map();
+
+    // Parcourir les données pour calculer les totaux d'xp par mois
+    data.forEach(entry => {
+        const createdAt = new Date(entry.createdAt);
+        const monthYearKey = `${createdAt.getMonth() + 1}-${createdAt.getFullYear()}`;
+
+        if (xpMap.has(monthYearKey)) {
+            xpMap.set(monthYearKey, xpMap.get(monthYearKey) + entry.amount);
+        } else {
+            xpMap.set(monthYearKey, entry.amount);
+        }
+    });
+
+    // Convertir le Map en tableau d'objets
+    for (const [monthYear, xp] of xpMap) {
+        const [month, year] = monthYear.split('-');
+        xpByMonth.push({ month, year, xp });
+    }
+
+    return xpByMonth;
 }

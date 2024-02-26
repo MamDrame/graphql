@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import CircleCard from "../components/circlecard.jsx";
-import DiagramCard from "../components/diagramcard.jsx";
+import BarChart from "../components/diagramcard.jsx";
 import { Footer } from "../components/footer.jsx";
 import ListCard from "../components/listcard.jsx";
 import { Loader } from "../components/loader.jsx";
@@ -42,9 +42,9 @@ export default function Profile() {
             level={data?.user[0]?.level[0]?.level}
           />
         </section>
-        <section className="col-span-12 rounded-lg p-32 shadow-md bg-gray-900 sm:col-span-8">
+        <section className="col-span-12 rounded-lg shadow-md bg-gray-900 sm:col-span-8">
           {/* Graph Content */}
-          <DiagramCard />
+          <BarChart data={data?.transaction_aggregate.nodes} />
         </section>
         <section className="col-span-12 rounded-lg p-16 shadow-md bg-gray-900 sm:col-span-4">
           {/* Diagram Content */}
