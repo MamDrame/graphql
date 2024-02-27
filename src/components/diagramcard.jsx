@@ -7,7 +7,6 @@ import { calculateXpByMonth } from "../lib/utils.js";
 
 const BarChart = ({ data }) => {
   data = calculateXpByMonth(data);
-  console.log(data);
   const svgRef = useRef();
 
   useEffect(() => {
@@ -51,14 +50,42 @@ const BarChart = ({ data }) => {
         .attr("width", x.bandwidth())
         .attr("y", (d) => y(d.xp))
         .attr("height", (d) => height - y(d.xp))
-        .attr("fill", "#4F46E5");
+        .attr("fill", "#4F46E5")
+        //add interactivity and color change and add text on hover
+        .on("mouseover", (event, d) => {
+          d3.select(event.target)
+            .transition()
+            .duration(300)
+            .attr("fill", "#FFC107");
+          svg
+            .append("text")
+            .attr("class", "text")
+            .attr("x", x(d.month + "-" + d.year))
+            .attr("y", y(d.xp) - 10)
+            .text(d.xp);
+        })
+        .on("mouseout", (event) => {
+          d3.select(event.target)
+            .transition()
+            .duration(300)
+            .attr("fill", "#4F46E5");
+          svg.select(".text").remove();
+        });
     }
     return () => {
       d3.select(svgRef.current).selectAll("*").remove();
     };
   }, [data]);
 
-  return <svg ref={svgRef}></svg>;
+  return (
+    <>
+      <div className="text-center text-xl font-bold text-white">
+        <h1>XP by Month</h1>
+        <p>This chart represents the number of XP earned per month.</p>
+      </div>
+      <svg ref={svgRef} className="text-white"></svg>
+    </>
+  );
 };
 
 export default BarChart;
