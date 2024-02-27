@@ -29,7 +29,6 @@ Beside those sections it will have a mandatory section for the generation of sta
 ## Table of Contents
 
 - [Installation](#installation)
-- [Usage](#usage)
 - [Contributing](#contributing)
 - [License](#license)
 
