@@ -32,7 +32,6 @@ const BarChart = ({ data }) => {
         .scaleLinear()
         .range([height, 0])
         .domain([0, d3.max(data, (d) => d.xp)]);
-
       svg
         .append("g")
         .attr("transform", `translate(0, ${height})`)
@@ -60,6 +59,7 @@ const BarChart = ({ data }) => {
           svg
             .append("text")
             .attr("class", "text")
+            .attr("style", `fill: blue; font-size: 14px; font-weight: bold;`)
             .attr("x", x(d.month + "-" + d.year))
             .attr("y", y(d.xp) - 10)
             .text(d.xp);

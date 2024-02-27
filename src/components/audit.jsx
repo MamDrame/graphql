@@ -4,7 +4,7 @@ export function Auditcomponent({ up, down, data }) {
   return (
     <div
       href="#"
-      className="flex h-48 w-1/4 flex-col bg-gray-900 shadow-md items-center justify-evenly rounded-md"
+      className="flex h-48 w-full flex-col bg-gray-900 shadow-md items-center justify-evenly rounded-md"
     >
       <div className="text-2xl items-center justify-start">Audit Ratio</div>
       <AuditGraph up={up} down={down} data={data} />

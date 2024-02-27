@@ -13,10 +13,10 @@ export function StatCard({ downRatio, upRatio, xp, level }) {
   const data = upRatio / downRatio;
   const Xp = convertXP(xp);
   return (
-    <div className="mt-2 flex w-full flex-wrap items-center justify-center gap-16">
+    <div className="mt-2 grid grid-cols-3 items-center justify-center">
       <div
         href="#"
-        className="flex h-48 w-1/4 flex-col bg-gray-900 shadow-md items-center justify-evenly rounded-md"
+        className="flex h-48 w-full flex-col bg-gray-900 shadow-md items-center justify-evenly rounded-md"
       >
         <div className="flex flex-row text-2xl items-center justify-between gap-4">
           <h4>XP</h4>
@@ -28,7 +28,7 @@ export function StatCard({ downRatio, upRatio, xp, level }) {
       </div>
       <div
         href="#"
-        className="flex h-48 w-1/4 flex-col bg-gray-900 shadow-md items-center justify-evenly rounded-md"
+        className="flex h-48 w-full flex-col bg-gray-900 shadow-md items-center justify-evenly rounded-md"
       >
         <div className="flex flex-row text-2xl items-center justify-center gap-4">
           <div>Level</div>
