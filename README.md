@@ -34,11 +34,20 @@ Beside those sections it will have a mandatory section for the generation of sta
 
 ## Installation
 
+You can clone this repository
+
+```bash
+git clone https://learn.zone01dakar.sn/git/mamdrame/graphql.git
+```
+
+Then you can install the dependencies
+and run the project locally. You'll need to have [Node.js](https://nodejs.org/en/) installed, [NPM](https://www.npmjs.com/), [Vite](https://vitejs.dev/), and [Tailwind CSS](https://tailwindcss.com/).
+
 You can run this project locally or access it directly from the web:
 
 with vercel
 
-[URL](https://graphql-coral.vercel.app/)
+[URL](https://graphql-coral.vercel.app/): https://graphql-coral.vercel.app/
 
 With command line:
 
