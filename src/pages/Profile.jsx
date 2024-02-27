@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import CircleCard from "../components/circlecard.jsx";
+import { DonutChart } from "../components/circlecard.jsx";
 import BarChart from "../components/diagramcard.jsx";
 import { Footer } from "../components/footer.jsx";
 import ListCard from "../components/listcard.jsx";
@@ -19,10 +19,17 @@ export default function Profile() {
 
   const { data, loading, error } = useFetch(token);
   if (error) {
-    return <div>Error: {error.message}</div>;
+    return (
+      <div className="items-center text-white">Error: {error.message}</div>
+    );
   }
   if (loading) {
     return <Loader />;
+  }
+
+  if (!data) {
+    localStorage.removeItem("token");
+    location.href = "/";
   }
   console.log(data);
 
@@ -33,7 +40,7 @@ export default function Profile() {
           {/* Header content */}
           <Navbar user={data?.user} />
         </header>
-        <section className="col-span-full rounded-lg sm:col-span-full">
+        <section className="flex flex-row justify-evenly col-span-full rounded-lg sm:col-span-full">
           {/* stats Content */}
           <StatCard
             downRatio={data?.downRatio.aggregate.sum.amount}
@@ -46,9 +53,9 @@ export default function Profile() {
           {/* Graph Content */}
           <BarChart data={data?.transaction_aggregate.nodes} />
         </section>
-        <section className="col-span-12 rounded-lg p-16 shadow-md bg-gray-900 sm:col-span-4">
-          {/* Diagram Content */}
-          <CircleCard />
+        <section className="col-span-12 rounded-lg shadow-md bg-gray-900 sm:col-span-4">
+          <h6 className="text-center text-2xl font-bold text-white">Skills</h6>
+          <DonutChart data={data?.skills} />
         </section>
         <section className="col-span-full rounded-lg shadow-md bg-gray-900 sm:col-span-full">
           {/* Table Content */}
