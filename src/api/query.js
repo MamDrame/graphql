@@ -48,15 +48,10 @@ export const QueryUserData = `
       }
     }
   }
-  skills: transaction_aggregate(
-    where: {event: {registrationId: {_eq: 55}}, type: {_ilike: "skill_%"}}
-    order_by: {amount: desc}
-  ) {
-    nodes {
-      type
-      amount
-    }
-  }
+skills:transaction (order_by: { type: asc, amount: desc } distinct_on: [type]  where: {type: {_ilike: "skill%"}} ) {
+                amount
+                type
+            }
   upRatio: transaction_aggregate(where: {type: {_eq: "up"}}) {
     aggregate {
       sum {
