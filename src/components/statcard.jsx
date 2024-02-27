@@ -21,7 +21,7 @@ export function StatCard({ downRatio, upRatio, xp, level }) {
         <div className="flex flex-row text-2xl items-center justify-between gap-4">
           <h4>XP</h4>
         </div>
-        <span className="w-28 h-28 rounded-full bg-gradient-to-br from-slate-900 to-purple-900 flex flex-col items-center justify-center font-bold text-3xl text-purple-600">
+        <span className="w-32 h-32 rounded-full bg-gradient-to-br from-slate-900 to-purple-900 flex flex-col items-center justify-center font-bold text-3xl text-purple-600">
           {Xp}
         </span>
         <p className="m-0.5 text-l ">XP</p>

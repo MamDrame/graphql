@@ -18,7 +18,13 @@ export function useFetch(token) {
           },
           body: JSON.stringify({ query: QueryUserData }),
         });
-        const responseData = await response.json();
+        const responseData = await response.json()
+        if (!response.ok) {
+          localStorage.removeItem('token');
+          location.href = '/';
+          setLoading(false);
+          console.log(responseData.errors[0].message);
+        }
         setData(responseData.data);
         setLoading(false);
       } catch (error) {
