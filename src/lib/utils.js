@@ -51,3 +51,21 @@ export function calculateXpByMonth(data) {
 
     return xpByMonth;
 }
+
+export function filterAndAddColor(competences) {
+    const couleurs = {
+        "skill_go": "#ef4444",
+        "skill_algo": "#f97316",
+        "skill_js": "#84cc16",
+        "skill_back-end": "#22c55e",
+        "skill_front-end": "#0ea5e9",
+        "skill_prog": "#a21caf"
+    };
+
+    return competences.filter(competence => Object.prototype.hasOwnProperty.call(couleurs, competence.type)).map(competence => {
+        return {
+            ...competence,
+            couleur: couleurs[competence.type]
+        };
+    });
+}
