@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 
 import * as d3 from "d3";
@@ -52,6 +53,9 @@ const BarChart = ({ data }) => {
         .attr("height", (d) => height - y(d.xp))
         .attr("fill", "#4F46E5");
     }
+    return () => {
+      d3.select(svgRef.current).selectAll("*").remove();
+    };
   }, [data]);
 
   return <svg ref={svgRef}></svg>;
