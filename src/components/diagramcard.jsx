@@ -3,7 +3,7 @@
 
 import * as d3 from "d3";
 import { useEffect, useRef } from "react";
-import { calculateXpByMonth } from "../lib/utils.js";
+import { calculateXpByMonth, convertXP } from "../lib/utils.js";
 
 const BarChart = ({ data }) => {
   data = calculateXpByMonth(data);
@@ -62,7 +62,7 @@ const BarChart = ({ data }) => {
             .attr("style", `fill: blue; font-size: 14px; font-weight: bold;`)
             .attr("x", x(d.month + "-" + d.year))
             .attr("y", y(d.xp) - 10)
-            .text(d.xp);
+            .text(convertXP(d.xp));
         })
         .on("mouseout", (event) => {
           d3.select(event.target)
