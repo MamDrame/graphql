@@ -40,7 +40,7 @@ export default function Profile() {
           {/* Header content */}
           <Navbar user={data?.user} />
         </header>
-        <section className="flex flex-row justify-evenly col-span-2 rounded-lg md:grid-cols-1">
+        <section className="col-span-2 rounded-lg md:grid-cols-1">
           {/* stats Content */}
           <StatCard
             downRatio={data?.downRatio.aggregate.sum.amount}

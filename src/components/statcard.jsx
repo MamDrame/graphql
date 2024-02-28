@@ -13,7 +13,7 @@ export function StatCard({ downRatio, upRatio, xp, level }) {
   const data = upRatio / downRatio;
   const Xp = convertXP(xp);
   return (
-    <div className="mt-2 grid grid-cols-3 items-center justify-center">
+    <div className="mt-2 grid grid-cols-3 items-center gp-2">
       <div
         href="#"
         className="flex h-48 w-full flex-col bg-gray-900 shadow-md items-center justify-evenly rounded-md"

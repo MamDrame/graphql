@@ -3,7 +3,7 @@ import { convertFormatDate } from "../lib/utils.js";
 /* eslint-disable react/prop-types */
 export default function ListCard({ auditsTable, invalidAudits, validAudits }) {
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-x-auto w-full">
       <div className="text-center pb-4">
         <h2 className="text-2xl font-bold text-center">Audits</h2>
         <p>
@@ -11,7 +11,7 @@ export default function ListCard({ auditsTable, invalidAudits, validAudits }) {
           you failed {invalidAudits} projects and passed {validAudits} projects.
         </p>
       </div>
-      <table>
+      <table className="w-full">
         <thead className="border-b">
           <tr>
             <th scope="col" className="px-6 py-4 text-left text-sm font-medium">
