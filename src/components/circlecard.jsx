@@ -1,6 +1,6 @@
 import * as d3 from "d3";
 import { useEffect, useRef } from "react";
-import { filterAndAddColor } from "../lib/utils.js";
+import { capitalize, filterAndAddColor } from "../lib/utils.js";
 
 /* eslint-disable react/prop-types */
 
@@ -67,13 +67,14 @@ export const DonutChart = ({ data }) => {
 };
 
 function Legend({ d }) {
+  let type = d.type.split("_")[1];
   return (
     <div className="inline-flex items-center p-1">
       <span
         className="size-2 inline-block rounded-full me-2"
         style={{ backgroundColor: `${d.couleur}` }}
       />
-      <span className="text-gray-600">{d.type}</span>
+      <span className="text-gray-600">{capitalize(type)}</span>
     </div>
   );
 }
