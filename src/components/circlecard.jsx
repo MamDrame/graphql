@@ -68,12 +68,12 @@ export const DonutChart = ({ data }) => {
 
 function Legend({ d }) {
   return (
-    <div className="inline-flex items-center p-1" key={d.type}>
+    <div className="inline-flex items-center p-1">
       <span
         className="size-2 inline-block rounded-full me-2"
         style={{ backgroundColor: `${d.couleur}` }}
       />
-      <span className="text-gray-600 dark:text-gray-400">{d.type}</span>
+      <span className="text-gray-600">{d.type}</span>
     </div>
   );
 }

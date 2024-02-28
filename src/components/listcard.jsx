@@ -11,7 +11,7 @@ export default function ListCard({ auditsTable, invalidAudits, validAudits }) {
           you failed {invalidAudits} projects and passed {validAudits} projects.
         </p>
       </div>
-      <table className="min-w-full">
+      <table>
         <thead className="border-b">
           <tr>
             <th scope="col" className="px-6 py-4 text-left text-sm font-medium">

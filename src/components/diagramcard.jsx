@@ -55,7 +55,7 @@ const BarChart = ({ data }) => {
           d3.select(event.target)
             .transition()
             .duration(300)
-            .attr("fill", "#FFC107");
+            .attr("fill", "#9333ea");
           svg
             .append("text")
             .attr("class", "text")
