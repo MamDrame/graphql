@@ -59,7 +59,7 @@ const BarChart = ({ data }) => {
           svg
             .append("text")
             .attr("class", "text")
-            .attr("style", `fill: blue; font-size: 14px; font-weight: bold;`)
+            .attr("style", `fill:#9333ea ; font-size: 14px; font-weight: bold;`)
             .attr("x", x(d.month + "-" + d.year))
             .attr("y", y(d.xp) - 10)
             .text(convertXP(d.xp));
